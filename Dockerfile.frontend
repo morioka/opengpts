@@ -1,0 +1,11 @@
+FROM node:slim
+
+COPY ./frontend /ui
+
+WORKDIR /ui
+
+EXPOSE 5173
+
+RUN yarn install
+RUN yarn build  # If you want to build the dist instead
+CMD yarn dev

@@ -1,24 +1,40 @@
 version: '3'
 
 services:
-  redis:
+  opengpts-redis:
     image: redislabs/redisearch:latest
-    container_name: redis
+    container_name: opengpts-redis
     # Export the port that the service is listening on.
     expose:
       - "6379"
     ports:
       - "6379:6379"
-  backend:
+  opengpts-backend:
+    container_name: opengpts-backend
     build:
       context: .  # Use the current directory as the build context
       dockerfile: Dockerfile  # Specify the custom Dockerfile
     ports:
       - "8100:8100"
+    expose:
+      - "8100"
     depends_on:
-      - redis
+      - opengpts-redis
     env_file:
       - .env  # Use the .env file to load environment variables
     environment:
       PORT: 8100
-      REDIS_URL: "redis://redis:6379"
+      REDIS_URL: "redis://opengpts-redis:6379"
+  opengpts-frontend:
+    container_name: opengpts-frontend
+    build:
+      context: .  # Use the current directory as the build context
+      dockerfile: Dockerfile.frontend
+    environment:
+      - PORT=5173
+    ports:
+      - 5173:5173
+    expose:
+      - 5173
+    depends_on:
+      - opengpts-backend
