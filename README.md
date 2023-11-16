@@ -92,6 +92,15 @@ yarn dev
 
 Navigate to [http://localhost:5173/](http://localhost:5173/) and enjoy!
 
+### docker compose
+
+```shell
+docker compose build
+docker compose up -d
+```
+
+Navigate to [http://localhost:5173/](http://localhost:5173/) and enjoy!
+
 ## Features
 
 As much as possible, we are striving for feature parity with OpenAI.
