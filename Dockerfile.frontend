@@ -1,11 +1,19 @@
 FROM node:slim
 
-COPY ./frontend /ui
+#COPY ./frontend /ui
+WORKDIR /usr/src/packages
 
-WORKDIR /ui
+COPY frontend/package.json frontend/yarn.loc[k] ./
 
-EXPOSE 5173
+#COPY ./frontend 
+#WORKDIR /ui
+
+
+expose 5173
 
 RUN yarn install
+
+COPY ./frontend .
 RUN yarn build  # If you want to build the dist instead
+CMD yarn
 CMD yarn dev

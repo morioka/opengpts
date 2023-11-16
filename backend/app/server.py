@@ -113,7 +113,7 @@ def put_thread_endpoint(
     )
 
 
-#app.mount("", StaticFiles(directory=str(ROOT / "ui"), html=True), name="ui")
+app.mount("", StaticFiles(directory=str(ROOT / "ui"), html=True), name="ui")
 
 if __name__ == "__main__":
     import uvicorn
